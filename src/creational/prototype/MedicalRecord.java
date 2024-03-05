@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalRecord implements Prototype, Cloneable {
-    private String animalName;
     private String diagnosis;
     private List<String> treatments;
     private List<String> vaccinations; // Додайте список для зберігання інформації про вакцинацію

@@ -1,6 +1,7 @@
 package creational.abstractFactory;
 
+import creational.abstractFactory.medicals.Medicals;
+
 public abstract class AbstractFactory {
-    public abstract DrugManufacturer createManufacturer();
-    public abstract Medicals createMedicine();
+    public abstract Medicals createMedicine (MedicalTypes type);
 }

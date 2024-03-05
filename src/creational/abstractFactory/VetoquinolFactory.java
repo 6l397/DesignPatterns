@@ -1,13 +1,14 @@
 package creational.abstractFactory;
 
+import creational.abstractFactory.medicals.*;
+
 public class VetoquinolFactory extends AbstractFactory {
     @Override
-    public DrugManufacturer createManufacturer() {
-        return new Vetoquinol();
-    }
-
-    @Override
-    public Medicals createMedicine() {
-        return new Ibuprofen();
+    public Medicals createMedicine(MedicalTypes type) {
+        return switch (type) {
+            case PARACETAMOL -> new Paracetamol();
+            case IBUPROFEN -> new Ibuprofen();
+            default -> throw new IllegalStateException("Unexpected value: " + type);
+        };
     }
 }

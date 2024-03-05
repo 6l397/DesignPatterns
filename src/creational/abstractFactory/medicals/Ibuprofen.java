@@ -1,4 +1,4 @@
-package creational.abstractFactory;
+package creational.abstractFactory.medicals;
 
 public class Ibuprofen extends Medicals {
     @Override

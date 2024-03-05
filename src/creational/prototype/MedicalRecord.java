@@ -1,8 +1,15 @@
 package creational.prototype;
 
-public class MedicalRecord implements Cloneable {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MedicalRecord implements Prototype, Cloneable {
+    private String animalName;
+    private String diagnosis;
+    private List<String> treatments;
+
     @Override
-    public MedicalRecord clone() {
+    public Prototype doClone() {
         try {
             return (MedicalRecord) super.clone();
         } catch (CloneNotSupportedException e) {
@@ -11,11 +18,20 @@ public class MedicalRecord implements Cloneable {
         }
     }
     public void addTreatment(String treatment) {
+        if (treatments == null) {
+            treatments = new ArrayList<>();
+        }
+        treatments.add(treatment);
     }
 
-    public void addVaccination(String vaccine) {
+    public List<String> getTreatments() {
+        return treatments;
     }
 
     public void addDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+    public String getDiagnosis() {
+        return diagnosis;
     }
 }

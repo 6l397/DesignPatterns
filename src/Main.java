@@ -5,7 +5,24 @@ import creational.factory.Animal;
 import creational.factory.AnimalFactory;
 import creational.prototype.MedicalRecord;
 import creational.singleton.VeterinaryClinic;
+import structural.adapter.AnimalData;
+import structural.adapter.AnimalDataAdapter;
+import structural.adapter.CatHotel;
+import structural.bridge.*;
+import structural.composite.Administrator;
+import structural.composite.Doctor;
+import structural.composite.Nurse;
+import structural.composite.VetClinic;
+import structural.decorator.AnimalInfoDecorator;
+import structural.decorator.BasicClientProfile;
+import structural.decorator.ClientProfile;
+import structural.decorator.ContactInfoDecorator;
+import structural.facade.AnimalMedicalPassport;
+import structural.facade.AnimalMedicalPassportFacade;
+import structural.flyweight.CreateMedEquipment;
+
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class Main {
@@ -82,5 +99,78 @@ public class Main {
         for (String vaccination : medicalRecord.getVaccinations()) {
             System.out.println("- " + vaccination);
         }
+
+        // Adapter
+        System.out.println("--------------Adapter--------------");
+        CatHotel externalAnimalData = new CatHotel("Snowy", 5, "Bengal cat");
+
+        AnimalData animalData = new AnimalDataAdapter(externalAnimalData);
+
+        System.out.println("Name: " + animalData.getName());
+        System.out.println("Age: " + animalData.getAge());
+        System.out.println("Breed: " + animalData.getBreed());
+
+        // Bridge
+        System.out.println("--------------Bridge---------------");
+        VirtualAssistantImplementor chatbotImplementor = new ChatbotAssistantImplementor();
+        VirtualAssistantImplementor voiceImplementor = new VoiceAssistantImplementor();
+
+        VirtualAssistant chatbotAssistant = new ChatbotVirtualAssistant(chatbotImplementor);
+        VirtualAssistant voiceAssistant = new VoiceVirtualAssistant(voiceImplementor);
+
+        chatbotAssistant.provideInformation("Dog");
+        chatbotAssistant.giveAdvice();
+
+        voiceAssistant.provideInformation("Cat");
+        voiceAssistant.giveAdvice();
+
+        // Composite
+        System.out.println("-------------Composite-------------");
+        Doctor doctor1 = new Doctor();
+        Nurse nurse1 = new Nurse();
+        Administrator admin1 = new Administrator();
+
+        VetClinic clinic = new VetClinic();
+        clinic.addStaff(doctor1);
+        clinic.addStaff(nurse1);
+        clinic.addStaff(admin1);
+
+        clinic.performDuties();
+
+        // Decorator
+        System.out.println("-------------Decorator-------------");
+        ClientProfile basicProfile = new BasicClientProfile("Name: Alex Lav\nAddress: 123 Prospect St.");
+
+        ClientProfile profileWithContactInfo = new ContactInfoDecorator(basicProfile, "Phone: 555-1234\nEmail: sasha.lav@google.com");
+
+        ClientProfile profileWithAnimalInfo = new AnimalInfoDecorator(profileWithContactInfo, "Pet: Dog\nBreed: Labrador");
+
+        System.out.println("Client Profile:");
+        System.out.println(profileWithAnimalInfo.getBasicInfo());
+
+        // Facade
+        System.out.println("--------------Facade---------------");
+        AnimalMedicalPassport passport = new AnimalMedicalPassport();
+
+        passport.saveMedicalRec("1", "Medical data for animal 1");
+        String medicalRec = passport.getMedicalRec("1");
+        System.out.println("Retrieved medical record: " + medicalRec);
+
+        passport.scheduleVaccination("2", "Rabies");
+        passport.cancelVaccination("2", "Rabies");
+
+        // Proxy
+        System.out.println("---------------Proxy---------------");
+        AnimalMedicalPassportFacade facade = new AnimalMedicalPassportFacade();
+        List<String> records = facade.getMedicalRecords();
+        System.out.println("Medical records: " + records);
+
+        // Flyweight
+        System.out.println("-------------Flyweight-------------");
+
+        CreateMedEquipment equipment = new CreateMedEquipment();
+
+        equipment.performDiagnosis("3", "XRay");
+        equipment.performDiagnosis("4", "XRay");
     }
 }

@@ -1,27 +1,26 @@
 package structural.facade;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AnimalMedicalPassport {
-    private MedicalRecSystem medicalRecSystem;
-    private VaccinationSystem vaccinationSystem;
+    private String animalId;
+    private List<Record> records;
 
-    public AnimalMedicalPassport() {
-        this.medicalRecSystem = new MedicalRecSystem();
-        this.vaccinationSystem = new VaccinationSystem();
+    public AnimalMedicalPassport(String animalId) {
+        this.animalId = animalId;
+        this.records = new ArrayList<>();
     }
 
-    public void saveMedicalRec(String animalId, String medicalData) {
-        medicalRecSystem.saveMedicalRec(animalId, medicalData);
+    public void addRecord(Record record) {
+        records.add(record);
     }
 
-    public String getMedicalRec(String animalId) {
-        return medicalRecSystem.getMedicalRec(animalId);
+    public List<Record> getMedicalRecords() {
+        return records;
     }
 
-    public void scheduleVaccination(String animalId, String vaccineType) {
-        vaccinationSystem.scheduleVaccination(animalId, vaccineType);
-    }
-
-    public void cancelVaccination(String animalId, String vaccineType) {
-        vaccinationSystem.cancelVaccination(animalId, vaccineType);
+    public String getAnimalId() {
+        return animalId;
     }
 }

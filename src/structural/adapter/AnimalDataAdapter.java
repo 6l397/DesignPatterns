@@ -1,6 +1,6 @@
 package structural.adapter;
 
-public class AnimalDataAdapter implements AnimalData{
+public class AnimalDataAdapter implements AnimalData {
     private CatHotel externalAnimalData;
 
     public AnimalDataAdapter(CatHotel externalAnimalData) {
@@ -20,5 +20,14 @@ public class AnimalDataAdapter implements AnimalData{
     @Override
     public String getBreed() {
         return externalAnimalData.getBreed();
+    }
+
+    public double getTemperatureInCelsius() {
+        return (externalAnimalData.getTemperatureInFahrenheit() - 32) * 5 / 9;
+    }
+
+    @Override
+    public double getTemperature() {
+        return getTemperatureInCelsius();
     }
 }

@@ -1,16 +1,17 @@
 package structural.proxy;
 
+import structural.facade.Record;
 import java.util.List;
 
 public class RealAnimalMedicalRecords implements AnimalMedicalRecords{
-    private List<String> records;
+    private List<Record> records;
 
-    public RealAnimalMedicalRecords(List<String> records) {
+    public RealAnimalMedicalRecords(List<Record> records) {
         this.records = records;
     }
 
     @Override
-    public List<String> getRecords() {
+    public List<Record> getRecords() {
         return records;
     }
 }

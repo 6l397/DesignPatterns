@@ -3,7 +3,7 @@ package structural.composite;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VetClinic implements MedicalStaff{
+public class VetClinic implements MedicalStaff {
     private List<MedicalStaff> staff;
 
     public VetClinic() {

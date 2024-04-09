@@ -1,12 +1,11 @@
 package structural.facade;
 
-public class VaccinationSystem {
+class VaccinationSystem {
     public void scheduleVaccination(String animalId, String vaccineType) {
-        System.out.println("Scheduling vaccination for animal with ID: " + animalId);
+        System.out.println("Scheduling vaccination for animal with ID: " + animalId + ", Vaccine Type: " + vaccineType);
     }
 
     public void cancelVaccination(String animalId, String vaccineType) {
-        System.out.println("Cancelling vaccination for animal with ID: " + animalId);
-
+        System.out.println("Cancelling vaccination for animal with ID: " + animalId + ", Vaccine Type: " + vaccineType);
     }
 }

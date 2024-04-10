@@ -42,7 +42,6 @@ import structural.flyweight.CreateMedEquipment;
 import structural.proxy.AnimalMedicalRecords;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -75,7 +74,7 @@ public class Main {
         System.out.println("-------------Singleton-------------");
         VeterinaryClinic clinic1 = VeterinaryClinic.getInstance();
         VeterinaryClinic clinic2 = VeterinaryClinic.getInstance();
-        System.out.println(clinic1 == clinic2); //true or faulse
+        System.out.println(clinic1 == clinic2);
 
         // Prototype
         System.out.println("-------------Prototype-------------");
@@ -222,11 +221,11 @@ public class Main {
 
         // Chain of Responsibility
         System.out.println("------Chain of Responsibility------");
-        TreatmentHandler therapist = new Therapist();
-        TreatmentHandler surgeon = new Surgeon();
+        Therapist therapist = new Therapist();
+        Surgeon surgeon = new Surgeon();
         TreatmentHandler vaccinationSpecialist = new VaccinationSpecialist();
-        ((Therapist) therapist).setNextHandler(surgeon);
-        ((Surgeon) surgeon).setNextHandler(vaccinationSpecialist);
+        therapist.setNextHandler(surgeon);
+        surgeon.setNextHandler(vaccinationSpecialist);
         AnimalTreatmentRequest request1 = new AnimalTreatmentRequest("123", "therapy");
         AnimalTreatmentRequest request2 = new AnimalTreatmentRequest("456", "surgery");
         AnimalTreatmentRequest request3 = new AnimalTreatmentRequest("789", "vaccination");

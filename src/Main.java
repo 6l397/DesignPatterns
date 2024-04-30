@@ -17,6 +17,7 @@ import behavioral.templateMethod.AnimalTreatment;
 import behavioral.templateMethod.CatTreatment;
 import behavioral.templateMethod.DogTreatment;
 import behavioral.visitor.*;
+import codesmell.lab5.*;
 import creational.abstractFactory.*;
 import creational.abstractFactory.medicals.Medicals;
 import creational.builder.AnimalMedicalRecordBuilder;
@@ -42,6 +43,7 @@ import structural.flyweight.CreateMedEquipment;
 import structural.proxy.AnimalMedicalRecords;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -284,6 +286,7 @@ public class Main {
         AnimalM dog3 = new AnimalM("Buddy");
         CareTaker caretaker = new CareTaker();
         caretaker.saveAnimalState(dog3);
+        System.out.println("Default health status of " + dog3.getName() + ": " + dog3.getHealthStatus());
         dog3.performMedicalProcedure("vaccination");
         System.out.println("Current health status of " + dog3.getName() + ": " + dog3.getHealthStatus());
         caretaker.restoreAnimalState(dog3);
@@ -310,5 +313,44 @@ public class Main {
         fish.accept(fishVisitor);
         hamster.accept(hamsterVisitor);
         unknownAnimal.accept(otherVisitor);
+
+        //lab5
+        System.out.println("--------------CodeSmell-------------");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User("alex", "alex@google.com", "password123", "123 Java Street"));
+        users.add(new User("admin_user", "admin@google.com", "adminpassword", "456 Type Street"));
+        UserListProcessor processor = new UserListProcessor(users);
+        processor.processUserList();
+        int adminCount = processor.countAdminUsers();
+        System.out.println("Total admin users: " + adminCount);
+        User userToEmail = users.getFirst();
+        processor.sendEmailToUser(userToEmail);
+        List<User> updatedUsers = processor.getUsers();
+        System.out.println("Updated list of users:");
+        for (User user : updatedUsers) {
+            System.out.println(user.getUsername() + " - " + user.getEmail());
+        }
+        System.out.println("--------------CodeSmell-------------");
+        List<String> items = List.of("productA", "productB");
+        Order order = new Order("Amina", items, 30.00);
+        OrderProcessor orderProcessor = new OrderProcessor(order);
+        orderProcessor.processOrder();
+
+        PersonC person1 = new PersonC("Amina", 19, "Female");
+        System.out.println("Name: " + person1.getName());
+        System.out.println("Age: " + person1.getAge());
+        System.out.println("Gender: " + person1.getGender());
+
+        Relationships relationships = new Relationships();
+        relationships.addFriend("Sergiy");
+        relationships.addFriend("Maria");
+        relationships.addEnemy("Alex");
+        Tasks tasks = new Tasks();
+        tasks.addTask("Complete homework");
+        tasks.addTask("Go shopping");
+
+        System.out.println("Friends: " + relationships.getFriends());
+        System.out.println("Enemies: " + relationships.getEnemies());
+        System.out.println("Tasks: " + tasks.getTasks());
     }
 }
